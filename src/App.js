@@ -1,5 +1,6 @@
 import './App.css';
-import { Route , Routes , Navigate } from 'react-router-dom'; 
+import { Route, Routes, Navigate } from 'react-router-dom'; 
+import {Provider} from 'react-redux';
 
 //components
 import Store from './components/Store';
@@ -8,15 +9,12 @@ import { Navbar } from './components/shared/Navbar';
 import { ShopCart } from './components/ShopCart';
 
 
-//Context
-// eslint-disable-next-line no-unused-vars
-import ProductContextProvider from './context/ProductContextProvider';
-import { CardContextProvider } from './context/CardContextProvider';
+//Redux
+import store from './redux/store';
 
 function App() {
   return (
-    <ProductContextProvider>
-      <CardContextProvider>
+    <Provider store={store}>
         <Navbar/>
         <Routes>
           <Route path='/products/:id' element={<ProductDetails/>} /> 
@@ -24,8 +22,8 @@ function App() {
           <Route path='/Cart' element={<ShopCart/>} />
           <Route path='/*' element={<Navigate to='/products'/> } />
         </Routes>
-      </CardContextProvider>
-    </ProductContextProvider>
+    </Provider>
+     
   );
 }
 
